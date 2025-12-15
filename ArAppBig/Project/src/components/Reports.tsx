@@ -100,6 +100,89 @@ const sessions = [
   },
 ];
 
+const handleExportCSV = () => {
+  const csvContent = `Session ID,User,Mode,Score (%),Duration,Date,Status
+S-2024-156,Priya Sharma,Evaluate,98.5,18:45,"Nov 18, 2024",Pass
+S-2024-155,Rahul Singh,Evaluate,96.2,17:30,"Nov 18, 2024",Pass
+S-2024-154,Sneha Patel,Evaluate,94.8,19:15,"Nov 17, 2024",Pass
+S-2024-153,Vikram Mehta,Evaluate,93.5,20:10,"Nov 17, 2024",Pass
+S-2024-152,Anjali Gupta,Evaluate,91.2,18:50,"Nov 17, 2024",Pass
+S-2024-151,Kavya Reddy,Evaluate,68.5,16:45,"Nov 16, 2024",Fail
+S-2024-150,Arjun Nair,Evaluate,88.3,21:20,"Nov 16, 2024",Pass
+S-2024-149,Deepak Kumar,Evaluate,92.7,20:30,"Nov 16, 2024",Pass`;
+
+  const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.setAttribute("href", url);
+  link.setAttribute("download", "session_history_report.csv");
+  link.style.visibility = "hidden";
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+};
+
+const handleExportPDF = () => {
+  // Simple HTML-based PDF (uses browser's print-to-PDF via a new window)
+  const printWindow = window.open("", "_blank");
+  if (!printWindow) return;
+
+  const htmlContent = `
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Session History Report</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 40px; }
+    h1 { text-align: center; color: #203f78; }
+    h2 { color: #4a6fa5; }
+    table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+    th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+    th { background-color: #f2f2f2; }
+    .pass { background-color: #d4edda; color: #155724; }
+    .fail { background-color: #f8d7da; color: #721c24; }
+    .footer { margin-top: 40px; text-align: center; color: #666; font-size: 12px; }
+  </style>
+</head>
+<body>
+  <h1>Evaluate Session History Report</h1>
+  <p><strong>Generated on:</strong> ${new Date().toLocaleDateString()}</p>
+  <p><strong>Filter:</strong> Last 30 Days | All Users | All Modes</p>
+
+  <h2>Session Details</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Session ID</th><th>User</th><th>Mode</th><th>Score (%)</th><th>Duration</th><th>Date</th><th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>S-2024-156</td><td>Priya Sharma</td><td>Evaluate</td><td>98.5</td><td>18:45</td><td>Nov 18, 2024</td><td class="pass">Pass</td></tr>
+      <tr><td>S-2024-155</td><td>Rahul Singh</td><td>Evaluate</td><td>96.2</td><td>17:30</td><td>Nov 18, 2024</td><td class="pass">Pass</td></tr>
+      <tr><td>S-2024-154</td><td>Sneha Patel</td><td>Evaluate</td><td>94.8</td><td>19:15</td><td>Nov 17, 2024</td><td class="pass">Pass</td></tr>
+      <tr><td>S-2024-153</td><td>Vikram Mehta</td><td>Evaluate</td><td>93.5</td><td>20:10</td><td>Nov 17, 2024</td><td class="pass">Pass</td></tr>
+      <tr><td>S-2024-152</td><td>Anjali Gupta</td><td>Evaluate</td><td>91.2</td><td>18:50</td><td>Nov 17, 2024</td><td class="pass">Pass</td></tr>
+      <tr><td>S-2024-151</td><td>Kavya Reddy</td><td>Evaluate</td><td>68.5</td><td>16:45</td><td>Nov 16, 2024</td><td class="fail">Fail</td></tr>
+      <tr><td>S-2024-150</td><td>Arjun Nair</td><td>Evaluate</td><td>88.3</td><td>21:20</td><td>Nov 16, 2024</td><td class="pass">Pass</td></tr>
+      <tr><td>S-2024-149</td><td>Deepak Kumar</td><td>Evaluate</td><td>92.7</td><td>20:30</td><td>Nov 16, 2024</td><td class="pass">Pass</td></tr>
+    </tbody>
+  </table>
+
+  <div class="footer">Showing 8 of 156 sessions</div>
+</body>
+</html>`;
+
+  printWindow.document.write(htmlContent);
+  printWindow.document.close();
+  printWindow.focus();
+  // Give it a moment to render, then trigger print dialog (user selects "Save as PDF")
+  setTimeout(() => {
+    printWindow.print();
+    // Optional: close after printing (user can cancel)
+    // printWindow.close();
+  }, 500);
+};
+
 export function Reports() {
   return (
     <div className="space-y-4">
@@ -131,16 +214,23 @@ export function Reports() {
             </select>
 
             {/* Export Buttons */}
-            <div className="flex items-center gap-2 pl-2 ml-auto lg:ml-2 lg:border-l border-gray-200 dark:border-gray-700">
-              <button className="flex items-center gap-1.5 px-3 py-1.5 text-xs rounded-lg bg-[#203f78] dark:bg-[#4a6fa5] text-white">
-                <Download className="w-3.5 h-3.5" />
-                <span className="hidden sm:inline">Export PDF</span>
-              </button>
-              <button className="flex items-center gap-1.5 px-3 py-1.5 text-xs rounded-lg bg-green-600 dark:bg-green-700 text-white">
-                <Download className="w-3.5 h-3.5" />
-                <span className="hidden sm:inline">Export CSV</span>
-              </button>
-            </div>
+{/* Export Buttons */}
+<div className="flex items-center gap-2 pl-2 ml-auto lg:ml-2 lg:border-l border-gray-200 dark:border-gray-700">
+  <button
+    onClick={handleExportPDF}
+    className="flex items-center gap-1.5 px-3 py-1.5 text-xs rounded-lg bg-[#203f78] dark:bg-[#4a6fa5] text-white hover:opacity-90 transition"
+  >
+    <Download className="w-3.5 h-3.5" />
+    <span className="hidden sm:inline">Export PDF</span>
+  </button>
+  <button
+    onClick={handleExportCSV}
+    className="flex items-center gap-1.5 px-3 py-1.5 text-xs rounded-lg bg-green-600 dark:bg-green-700 text-white hover:opacity-90 transition"
+  >
+    <Download className="w-3.5 h-3.5" />
+    <span className="hidden sm:inline">Export CSV</span>
+  </button>
+</div>
           </div>
         </div>
       </div>
