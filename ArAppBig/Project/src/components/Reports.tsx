@@ -113,34 +113,32 @@ export function Reports() {
 
           <div className="flex flex-wrap items-center gap-2">
             {/* Date Filter */}
-            <button className="flex items-center gap-1.5 px-3 py-1.5 text-xs rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all">
+            <button className="flex items-center gap-1.5 px-3 py-1.5 text-xs rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300">
               <Calendar className="w-3.5 h-3.5" />
               <span>Last 30 Days</span>
             </button>
 
             {/* User Filter */}
-            <button className="flex items-center gap-1.5 px-3 py-1.5 text-xs rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all">
+            <button className="flex items-center gap-1.5 px-3 py-1.5 text-xs rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300">
               <Filter className="w-3.5 h-3.5" />
               <span>All Users</span>
             </button>
 
             {/* Mode Filter */}
-            <select className="px-3 py-1.5 rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all text-xs focus:outline-none focus:ring-2 focus:ring-[#203f78] dark:focus:ring-[#4a6fa5]">
+            <select className="px-3 py-1.5 rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 text-xs">
               <option>All Modes</option>
               <option>Evaluate</option>
             </select>
 
             {/* Export Buttons */}
             <div className="flex items-center gap-2 pl-2 ml-auto lg:ml-2 lg:border-l border-gray-200 dark:border-gray-700">
-              <button className="flex items-center gap-1.5 px-3 py-1.5 text-xs rounded-lg bg-[#203f78] dark:bg-[#4a6fa5] text-white hover:bg-[#203f78]/90 dark:hover:bg-[#4a6fa5]/90 transition-all">
+              <button className="flex items-center gap-1.5 px-3 py-1.5 text-xs rounded-lg bg-[#203f78] dark:bg-[#4a6fa5] text-white">
                 <Download className="w-3.5 h-3.5" />
                 <span className="hidden sm:inline">Export PDF</span>
-                <span className="sm:hidden">PDF</span>
               </button>
-              <button className="flex items-center gap-1.5 px-3 py-1.5 text-xs rounded-lg bg-green-600 dark:bg-green-700 text-white hover:bg-green-700 dark:hover:bg-green-800 transition-all">
+              <button className="flex items-center gap-1.5 px-3 py-1.5 text-xs rounded-lg bg-green-600 dark:bg-green-700 text-white">
                 <Download className="w-3.5 h-3.5" />
                 <span className="hidden sm:inline">Export CSV</span>
-                <span className="sm:hidden">CSV</span>
               </button>
             </div>
           </div>
@@ -161,57 +159,16 @@ export function Reports() {
               </p>
             </div>
           </div>
-
-          <div className="flex items-center gap-3 flex-wrap">
-            <div className="flex items-center gap-1.5">
-              <div className="w-2.5 h-2.5 rounded-full bg-[#4a6fa5]" />
-              <span className="text-xs text-gray-600 dark:text-gray-300">
-                Pass
-              </span>
-            </div>
-            <div className="flex items-center gap-1.5">
-              <div className="w-2.5 h-2.5 rounded-full bg-[#203f78]" />
-              <span className="text-xs text-gray-600 dark:text-gray-300">
-                Fail
-              </span>
-            </div>
-          </div>
         </div>
 
         <ResponsiveContainer width="100%" height={220}>
           <BarChart data={trendData}>
-            <CartesianGrid
-              strokeDasharray="3 3"
-              className="stroke-gray-200 dark:stroke-gray-700"
-            />
-            <XAxis
-              dataKey="month"
-              className="text-gray-600 dark:text-gray-300"
-              style={{ fontSize: "11px" }}
-            />
-            <YAxis
-              className="text-gray-600 dark:text-gray-300"
-              style={{ fontSize: "11px" }}
-            />
-            <Tooltip
-              contentStyle={{
-                backgroundColor: "var(--tooltip-bg, #ffffff)",
-                border: "1px solid var(--tooltip-border, #e5e7eb)",
-                borderRadius: "8px",
-                fontSize: "12px",
-              }}
-              cursor={{ fill: 'rgba(32, 63, 120, 0.1)' }}
-            />
-            <Bar
-              dataKey="pass"
-              fill="#4a6fa5"
-              radius={[4, 4, 0, 0]}
-            />
-            <Bar
-              dataKey="fail"
-              fill="#203f78"
-              radius={[4, 4, 0, 0]}
-            />
+            <CartesianGrid strokeDasharray="3 3" className="stroke-gray-200 dark:stroke-gray-700" />
+            <XAxis dataKey="month" />
+            <YAxis />
+            <Tooltip />
+            <Bar dataKey="pass" fill="#4a6fa5" radius={[4, 4, 0, 0]} />
+            <Bar dataKey="fail" fill="#203f78" radius={[4, 4, 0, 0]} />
           </BarChart>
         </ResponsiveContainer>
       </div>
@@ -221,86 +178,50 @@ export function Reports() {
         <div className="flex items-center gap-2 mb-4">
           <FileText className="w-4 h-4 text-[#203f78] dark:text-[#4a6fa5]" />
           <div>
-            <h3 className="text-sm text-gray-900 dark:text-white">
-              Session History
-            </h3>
+            <h3 className="text-sm text-gray-900 dark:text-white">Session History</h3>
             <p className="text-xs text-gray-500 dark:text-gray-400">
               Detailed chronological records
             </p>
           </div>
         </div>
 
-        {/* Table */}
-        <div className="overflow-x-auto">
+        {/* Desktop Table */}
+        <div className="overflow-x-auto hidden sm:block">
           <table className="w-full">
             <thead>
               <tr className="border-b border-gray-200 dark:border-gray-700">
-                <th className="text-left py-2.5 px-3 text-xs text-gray-600 dark:text-gray-300">
-                  Session ID
-                </th>
-                <th className="text-left py-2.5 px-3 text-xs text-gray-600 dark:text-gray-300">
-                  User
-                </th>
-                <th className="text-left py-2.5 px-3 text-xs text-gray-600 dark:text-gray-300">
-                  Mode
-                </th>
-                <th className="text-left py-2.5 px-3 text-xs text-gray-600 dark:text-gray-300">
-                  Score
-                </th>
-                <th className="text-left py-2.5 px-3 text-xs text-gray-600 dark:text-gray-300">
-                  Duration
-                </th>
-                <th className="text-left py-2.5 px-3 text-xs text-gray-600 dark:text-gray-300">
-                  Date
-                </th>
-                <th className="text-left py-2.5 px-3 text-xs text-gray-600 dark:text-gray-300">
-                  Status
-                </th>
+                <th className="text-left py-2.5 px-3 text-xs text-gray-600">Session ID</th>
+                <th className="text-left py-2.5 px-3 text-xs text-gray-600">User</th>
+                <th className="text-left py-2.5 px-3 text-xs text-gray-600">Mode</th>
+                <th className="text-left py-2.5 px-3 text-xs text-gray-600">Score</th>
+                <th className="text-left py-2.5 px-3 text-xs text-gray-600">Duration</th>
+                <th className="text-left py-2.5 px-3 text-xs text-gray-600">Date</th>
+                <th className="text-left py-2.5 px-3 text-xs text-gray-600">Status</th>
               </tr>
             </thead>
             <tbody>
               {sessions.map((session) => (
-                <tr
-                  key={session.id}
-                  className="border-b border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 transition-all"
-                >
-                  <td className="py-2.5 px-3 text-xs text-gray-600 dark:text-gray-300">
-                    {session.id}
-                  </td>
-                  <td className="py-2.5 px-3 text-xs text-gray-900 dark:text-white">
-                    {session.user}
-                  </td>
+                <tr key={session.id} className="border-b border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800">
+                  <td className="py-2.5 px-3 text-xs text-gray-600">{session.id}</td>
+                  <td className="py-2.5 px-3 text-xs text-gray-900">{session.user}</td>
                   <td className="py-2.5 px-3">
-                    <span
-                      className={`px-2 py-0.5 rounded-md text-xs ${
-                        session.mode === "Train"
-                          ? "bg-green-100 text-green-700 border border-green-200"
-                          : session.mode === "Test"
-                            ? "bg-[#203f78]/10 text-[#203f78] border border-[#203f78]/20"
-                            : "bg-orange-100 text-orange-700 border border-orange-200"
-                      }`}
-                    >
+                    <span className={`px-2 py-0.5 rounded-md text-xs ${
+                      session.mode === "Train"
+                        ? "bg-green-100 text-green-700"
+                        : "bg-orange-100 text-orange-700"
+                    }`}>
                       {session.mode}
                     </span>
                   </td>
-                  <td className="py-2.5 px-3 text-xs text-gray-900 dark:text-white">
-                    {session.score}%
-                  </td>
-                  <td className="py-2.5 px-3 text-xs text-gray-600 dark:text-gray-300">
-                    {session.duration}
-                  </td>
-                  <td className="py-2.5 px-3 text-xs text-gray-600 dark:text-gray-300">
-                    {session.date}
-                  </td>
+                  <td className="py-2.5 px-3 text-xs">{session.score}%</td>
+                  <td className="py-2.5 px-3 text-xs">{session.duration}</td>
+                  <td className="py-2.5 px-3 text-xs">{session.date}</td>
                   <td className="py-2.5 px-3">
-                    <span
-                      className={`px-2 py-0.5 rounded-md text-xs ${
-                        session.status === "Pass" ||
-                        session.status === "Complete"
-                          ? "bg-green-100 text-green-700 border border-green-200"
-                          : "bg-red-100 text-red-700 border border-red-200"
-                      }`}
-                    >
+                    <span className={`px-2 py-0.5 rounded-md text-xs ${
+                      session.status === "Pass"
+                        ? "bg-green-100 text-green-700"
+                        : "bg-red-100 text-red-700"
+                    }`}>
                       {session.status}
                     </span>
                   </td>
@@ -310,27 +231,44 @@ export function Reports() {
           </table>
         </div>
 
+        {/* Mobile Cards */}
+        <div className="sm:hidden space-y-3">
+          {sessions.map((session) => (
+            <div key={session.id} className="border border-gray-200 dark:border-gray-700 rounded-lg p-3 bg-gray-50 dark:bg-gray-800">
+              <div className="flex justify-between items-center mb-2">
+                <span className="text-sm font-semibold text-gray-900 dark:text-white">
+                  {session.id}
+                </span>
+
+                <span className={`px-2 py-0.5 rounded-md text-xs ${
+                  session.status === "Pass"
+                    ? "bg-green-100 text-green-700"
+                    : "bg-red-100 text-red-700"
+                }`}>
+                  {session.status}
+                </span>
+              </div>
+
+              <div className="text-xs text-gray-700 dark:text-gray-300 space-y-1">
+                <p><strong>User:</strong> {session.user}</p>
+                <p><strong>Mode:</strong> {session.mode}</p>
+                <p><strong>Score:</strong> {session.score}%</p>
+                <p><strong>Duration:</strong> {session.duration}</p>
+                <p><strong>Date:</strong> {session.date}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
         {/* Pagination */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-3 mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
-          <p className="text-xs text-gray-500 dark:text-gray-400">
-            Showing 8 of 156 sessions
-          </p>
+          <p className="text-xs text-gray-500">Showing 8 of 156 sessions</p>
           <div className="flex items-center gap-1.5">
-            <button className="px-3 py-1.5 rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all text-xs">
-              Previous
-            </button>
-            <button className="px-3 py-1.5 rounded-lg bg-[#203f78] dark:bg-[#4a6fa5] text-white text-xs">
-              1
-            </button>
-            <button className="px-3 py-1.5 rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all text-xs">
-              2
-            </button>
-            <button className="px-3 py-1.5 rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all text-xs">
-              3
-            </button>
-            <button className="px-3 py-1.5 rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all text-xs">
-              Next
-            </button>
+            <button className="px-3 py-1.5 rounded-lg bg-gray-50 dark:bg-gray-800 border text-xs">Previous</button>
+            <button className="px-3 py-1.5 rounded-lg bg-[#203f78] text-white text-xs">1</button>
+            <button className="px-3 py-1.5 rounded-lg bg-gray-50 dark:bg-gray-800 border text-xs">2</button>
+            <button className="px-3 py-1.5 rounded-lg bg-gray-50 dark:bg-gray-800 border text-xs">3</button>
+            <button className="px-3 py-1.5 rounded-lg bg-gray-50 dark:bg-gray-800 border text-xs">Next</button>
           </div>
         </div>
       </div>
