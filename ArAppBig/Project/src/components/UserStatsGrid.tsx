@@ -306,31 +306,45 @@ export function UserStatsGrid({ onUserSelect }: UserStatsGridProps) {
   return (
     <div className="space-y-4">
       {/* Header */}
-      <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 mb-8">
-  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
-    {/* Title & Description */}
-    <div className="flex-1 min-w-0">
-      <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-2">
-        User Statistics
-      </h2>
-      <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400">
-        Track individual user performance across all modules
-      </p>
-    </div>
+      <div className="bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-700 p-4 md:p-6 transition-colors">
+        <div className="
+            flex flex-wrap gap-4 
+            md:flex-nowrap 
+            items-center justify-between
+          "
+        >
+          {/* Left Section */}
+          <div className="flex items-center gap-3 min-w-[220px]">
+            <div className="w-10 h-10 rounded-xl bg-[#203f78] dark:bg-[#4a6fa5] flex items-center justify-center">
+              <User className="w-5 h-5 text-white" />
+            </div>
+            <div>
+              <h1 className="text-gray-900 dark:text-white text-base md:text-lg">
+                User Statistics
+              </h1>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                Track individual user performance across all modules
+              </p>
+            </div>
+          </div>
 
-    {/* Search Bar */}
-    <div className="relative w-full sm:w-80 lg:w-96">
-      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-      <input
-        type="text"
-        placeholder="Search by name..."
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        className="w-full pl-10 pr-4 py-2.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-900 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#203f78] focus:border-transparent transition"
-      />
-    </div>
-  </div>
-</div>
+          {/* Search Input */}
+          <div className="flex-1 w-full md:w-auto md:max-w-xs ml-auto">
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-6 h-4" />
+              <input
+                type="text"
+                placeholder="Search by name..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full pl-10 pr-4 py-2.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500
+                focus:outline-none focus:ring-2 focus:ring-[#203f78] focus:border-transparent transition"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
 
       {/* Users Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-4">
