@@ -49,10 +49,6 @@
         '@': path.resolve(__dirname, './src'),
       },
     },
-    build: {
-      target: 'esnext',
-      outDir: 'build',
-    },
     server: {
       host: '0.0.0.0',   // listen on all IPs
       port: 5173, 
