@@ -53,18 +53,28 @@ export function Sidebar({
 
         {/* Logo */}
         <div className="mb-6 flex items-center gap-2">
-          <div className="w-8 h-8 rounded-xl bg-[#203f78] dark:bg-[#4a6fa5] flex items-center justify-center shadow-sm">
-            <Layers className="w-4 h-4 text-white" />
-          </div>
-          <div>
-            <h1 className="text-gray-900 dark:text-white text-sm">
-              VR Analytics
-            </h1>
-            <p className="text-xs text-gray-500 dark:text-gray-400">
-              Training Platform
-            </p>
-          </div>
-        </div>
+  {/* Logo container (same as old icon wrapper) */}
+  <div className="w-12 h-8  flex items-center justify-center ">
+    <img
+      src="/logo2.png"
+      alt="Logo"
+      className="w-18 h-10 object-contain"
+    />
+  </div>
+
+  {/* Text */}
+  <div>
+    <h1 className="text-gray-900 dark:text-white text-sm">
+      VR Analytics
+    </h1>
+    <p className="text-xs text-gray-500 dark:text-gray-400">
+      Training Platform
+    </p>
+  </div>
+</div>
+
+
+
 
         {/* Navigation */}
         <nav className="flex-1 space-y-1">
@@ -130,14 +140,15 @@ export function Sidebar({
         </nav>
 
         {/* Footer decoration */}
-        <div className="mt-auto pt-4 border-t border-gray-200 dark:border-gray-700">
-          <div className="p-3 rounded-lg bg-[#203f78]/5 dark:bg-[#4a6fa5]/10 border border-[#203f78]/20 dark:border-[#4a6fa5]/30">
-            <p className="text-xs text-gray-600 dark:text-gray-400">
-              Powered by AR/VR
-            </p>
-            <p className="text-xs text-[#203f78] dark:text-[#4a6fa5]">Version 2.0</p>
-          </div>
-        </div>
+        <div className="mt-auto pt-4 border-t border-gray-200 dark:border-gray-700 flex justify-center">
+        <img
+  src="/logo1.png"
+  alt="Logo"
+  className="h-8 object-contain opacity-80"
+/>
+
+</div>
+
       </aside>
     </>
   );
